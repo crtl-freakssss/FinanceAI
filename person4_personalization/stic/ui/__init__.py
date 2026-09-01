@@ -1,0 +1,3 @@
+"""
+StIC UI Integration Package
+"""

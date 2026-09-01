@@ -1,0 +1,79 @@
+{
+  "moderate_001": {
+    "user_id": "moderate_001",
+    "total_value": 500000.0,
+    "cash": 150000.0,
+    "holdings": [
+      {
+        "symbol": "RELIANCE.NS",
+        "shares": 50,
+        "average_buy_price": 2400.0,
+        "current_price": 2600.0,
+        "sector": "Energy",
+        "value": 130000.0
+      },
+      {
+        "symbol": "HDFCBANK.NS",
+        "shares": 80,
+        "average_buy_price": 1450.0,
+        "current_price": 1500.0,
+        "sector": "Finance",
+        "value": 120000.0
+      },
+      {
+        "symbol": "ITC.NS",
+        "shares": 250,
+        "average_buy_price": 380.0,
+        "current_price": 400.0,
+        "sector": "FMCG",
+        "value": 100000.0
+      }
+    ]
+  },
+  "conservative_001": {
+    "user_id": "conservative_001",
+    "total_value": 1000000.0,
+    "cash": 500000.0,
+    "holdings": [
+      {
+        "symbol": "HINDUNILVR.NS",
+        "shares": 100,
+        "average_buy_price": 2400.0,
+        "current_price": 2500.0,
+        "sector": "FMCG",
+        "value": 250000.0
+      },
+      {
+        "symbol": "TCS.NS",
+        "shares": 70,
+        "average_buy_price": 3400.0,
+        "current_price": 3500.0,
+        "sector": "Technology",
+        "value": 245000.0
+      }
+    ]
+  },
+  "aggressive_001": {
+    "user_id": "aggressive_001",
+    "total_value": 250000.0,
+    "cash": 25000.0,
+    "holdings": [
+      {
+        "symbol": "TATAMOTORS.NS",
+        "shares": 200,
+        "average_buy_price": 600.0,
+        "current_price": 650.0,
+        "sector": "Automobile",
+        "value": 130000.0
+      },
+      {
+        "symbol": "INFY.NS",
+        "shares": 65,
+        "average_buy_price": 1400.0,
+        "current_price": 1450.0,
+        "sector": "Technology",
+        "value": 94250.0
+      }
+    ]
+  }
+}

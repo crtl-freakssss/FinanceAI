@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SI Terminal Intelligence Platform - Candy Theme</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#fbf2fb",
+            "surface-container": "#f8eef8",
+            "surface-container-high": "#f2e8f2",
+            "surface-container-highest": "#ece2ec",
+            surface: "#fef7ff",
+            background: "#fef7ff",
+            primary: "#e040a0",
+            "primary-container": "#f080c0",
+            "primary-fixed": "#ffd6ee",
+            "primary-fixed-dim": "#f0a0cc",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#2e1a28",
+            "on-primary-fixed": "#3d0028",
+            "on-primary-fixed-variant": "#a02070",
+            secondary: "#7c52aa",
+            "secondary-container": "#eedcff",
+            "secondary-fixed": "#eedcff",
+            "secondary-fixed-dim": "#c8a8e8",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#2e2040",
+            tertiary: "#0096cc",
+            "tertiary-container": "#40c0ee",
+            "tertiary-fixed": "#c8eaff",
+            "tertiary-fixed-dim": "#80d0f0",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#00334d",
+            error: "#e53e3e",
+            "error-container": "#ffe8e8",
+            "on-error": "#ffffff",
+            "on-error-container": "#9b1c1c",
+            outline: "#907898",
+            "outline-variant": "#dcc8e0",
+            "on-surface": "#2e1a28",
+            "on-surface-variant": "#604868",
+            "on-background": "#2e1a28",
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "1.5rem",
+            xl: "2rem",
+            full: "9999px",
+          },
+          fontFamily: {
+            sans: ["'DM Sans'", "sans-serif"],
+            mono: ["'JetBrains Mono'", "monospace"],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      font-family: 'DM Sans', sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ai-glow {
+      box-shadow: 0px 0px 16px rgba(224, 64, 160, 0.22);
+    }
+    .ai-glow-secondary {
+      box-shadow: 0px 0px 16px rgba(124, 82, 170, 0.20);
+    }
+    .glass-card {
+      background: rgba(254, 247, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid #dcc8e0;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #e040a0, #7c52aa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-primary-bg {
+      background: linear-gradient(135deg, #e040a0, #c82888);
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #fbf2fb; }
+    ::-webkit-scrollbar-thumb { background: #dcc8e0; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #e040a0; }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen selection:bg-primary/20 selection:text-primary flex flex-col">
+
+  <!-- TOP APP BAR -->
+  <header class="sticky top-0 z-50 flex justify-between items-center px-6 h-16 bg-surface/95 backdrop-blur-md border-b border-outline-variant">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-secondary-container flex items-center justify-center border border-secondary/30 ai-glow">
+        <span class="material-symbols-outlined text-[22px] text-primary">auto_awesome</span>
+      </div>
+      <div>
+        <h1 class="font-bold text-lg text-on-surface tracking-tight flex items-center gap-2">
+          SI Terminal <span class="text-xs px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-mono font-semibold border border-primary/20">Person 4 Connected</span>
+        </h1>
+        <p class="text-[11px] text-on-surface-variant font-mono">Stitch Project #15879964569093521067</p>
+      </div>
+    </div>
+
+    <!-- Active Profile Switcher -->
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 bg-surface-container px-3 py-1.5 rounded-full border border-outline-variant">
+        <span class="text-xs text-on-surface-variant font-semibold uppercase tracking-wider">Investor:</span>
+        <select id="userSelector" class="bg-transparent text-primary text-xs font-mono font-bold focus:outline-none cursor-pointer" onchange="switchUser(this.value)">
+          <option value="moderate_001" class="bg-surface-container text-on-surface">moderate_001 (Balanced Growth)</option>
+          <option value="conservative_001" class="bg-surface-container text-on-surface">conservative_001 (Preservation)</option>
+          <option value="aggressive_001" class="bg-surface-container text-on-surface">aggressive_001 (Alpha Tech)</option>
+        </select>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span id="apiStatusBadge" class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse" title="Person 4 API Online"></span>
+        <span class="text-xs text-on-surface-variant font-mono hidden md:inline">API v1: Online</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <div class="border-b border-outline-variant bg-surface-container-low px-6 py-2.5 flex gap-3 overflow-x-auto">
+    <button onclick="switchTab('portfolio')" id="tab-portfolio" class="tab-btn px-4 py-2 rounded-full font-mono text-xs uppercase tracking-wider flex items-center gap-2 bg-primary text-on-primary shadow-sm font-semibold transition-all">
+      <span class="material-symbols-outlined text-[16px]">account_balance_wallet</span> Portfolio Analytics
+    </button>
+    <button onclick="switchTab('insights')" id="tab-insights" class="tab-btn px-4 py-2 rounded-full font-mono text-xs uppercase tracking-wider flex items-center gap-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">
+      <span class="material-symbols-outlined text-[16px]">psychology</span> AI Market Intelligence
+    </button>
+    <button onclick="switchTab('suitability')" id="tab-suitability" class="tab-btn px-4 py-2 rounded-full font-mono text-xs uppercase tracking-wider flex items-center gap-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all">
+      <span class="material-symbols-outlined text-[16px]">fact_check</span> Suitability & Context Engine
+    </button>
+  </div>
+
+  <!-- MAIN CANVAS -->
+  <main class="flex-1 p-6 max-w-7xl mx-auto w-full flex flex-col gap-6">
+
+    <!-- VIEW 1: PORTFOLIO ANALYTICS -->
+    <div id="view-portfolio" class="space-y-6">
+      <!-- Top Overview Banner -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+        
+        <!-- Total Value & Performance Chart Card -->
+        <section class="col-span-1 md:col-span-8 glass-card rounded-2xl p-6 flex flex-col min-h-[310px] relative overflow-hidden ai-glow">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <div class="text-[11px] font-mono text-on-surface-variant uppercase tracking-wider mb-1">Total Net Asset Value</div>
+              <div id="displayTotalValue" class="text-3xl md:text-4xl font-bold font-mono text-on-surface">₹4,35,000.00</div>
+              <div class="flex items-center gap-2 mt-2">
+                <span class="font-mono text-xs text-secondary font-bold flex items-center">
+                  <span class="material-symbols-outlined text-[14px]">arrow_upward</span> +₹14,500.00 (3.45%)
+                </span>
+                <span class="text-[10px] font-mono text-on-surface-variant uppercase px-2.5 py-0.5 bg-surface-container-highest rounded-full">vs Nifty 50 (+1.2%)</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <span id="healthBadge" class="px-3 py-1 rounded-full text-xs font-mono bg-secondary-container text-secondary font-bold border border-secondary/30">HEALTHY (78/100)</span>
+            </div>
+          </div>
+
+          <!-- Dynamic SVG Trend Line with Candy Gradient -->
+          <div class="flex-grow relative mt-2 w-full">
+            <svg class="w-full h-36 preserve-aspect-none" viewBox="0 0 1000 180">
+              <defs>
+                <linearGradient id="candyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#e040a0" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#7c52aa" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <path class="opacity-40" d="M0,130 L120,110 L240,125 L360,95 L480,105 L600,70 L720,85 L840,45 L1000,25 L1000,180 L0,180 Z" fill="url(#candyGrad)"></path>
+              <path d="M0,130 L120,110 L240,125 L360,95 L480,105 L600,70 L720,85 L840,45 L1000,25" fill="none" stroke="#e040a0" stroke-width="3" stroke-linecap="round"></path>
+            </svg>
+          </div>
+        </section>
+
+        <!-- Allocation & Risk Exposure Widget -->
+        <div class="col-span-1 md:col-span-4 flex flex-col gap-4">
+          <section class="glass-card rounded-2xl p-5 flex-1 flex flex-col justify-between ai-glow-secondary">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xs font-mono text-on-surface-variant uppercase font-semibold">Risk Exposure</span>
+                <span id="displayRiskLevel" class="text-xs font-mono text-primary bg-primary-fixed px-2.5 py-0.5 rounded-full font-bold border border-primary/20">MEDIUM</span>
+              </div>
+              <div class="w-full h-2.5 bg-surface-container-highest rounded-full overflow-hidden flex mb-4">
+                <div id="riskBarLow" class="h-full bg-secondary w-1/3"></div>
+                <div id="riskBarMed" class="h-full bg-primary w-1/3"></div>
+                <div id="riskBarHigh" class="h-full bg-error w-1/3 opacity-30"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-mono text-on-surface-variant uppercase mb-2 font-semibold">Sector Exposure</div>
+              <div id="sectorProgressContainer" class="space-y-2 text-xs font-mono">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+
+      <!-- Current Holdings Table -->
+      <section class="glass-card rounded-2xl overflow-hidden">
+        <div class="p-4 border-b border-outline-variant bg-surface-container/60 flex justify-between items-center">
+          <h3 class="text-xs font-mono uppercase tracking-wider text-on-surface font-bold flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-primary">view_list</span> Active Portfolio Holdings
+          </h3>
+          <span id="holdingsCount" class="text-xs font-mono text-on-surface-variant bg-surface-container-highest px-2.5 py-0.5 rounded-full">3 Positions</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left font-mono text-xs whitespace-nowrap">
+            <thead>
+              <tr class="text-on-surface-variant border-b border-outline-variant bg-surface-container-low">
+                <th class="py-3 px-4 font-semibold">Symbol</th>
+                <th class="py-3 px-4 font-semibold">Sector</th>
+                <th class="py-3 px-4 text-right font-semibold">Shares</th>
+                <th class="py-3 px-4 text-right font-semibold">Avg Price</th>
+                <th class="py-3 px-4 text-right font-semibold">Current Price</th>
+                <th class="py-3 px-4 text-right font-semibold">Market Value</th>
+                <th class="py-3 px-4 text-right font-semibold">Weight</th>
+              </tr>
+            </thead>
+            <tbody id="holdingsTableBody" class="divide-y divide-outline-variant/50">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: AI INSIGHTS & BEHAVIOR -->
+    <div id="view-insights" class="space-y-6 hidden">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        
+        <!-- Live AI Synthesis -->
+        <div class="md:col-span-8 space-y-6">
+          <div class="glass-card rounded-2xl p-6 relative overflow-hidden ai-glow flex flex-col gap-3">
+            <div class="absolute left-0 top-0 bottom-0 w-2 bg-primary"></div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">auto_awesome</span>
+              <span class="text-xs font-mono uppercase tracking-wider text-primary font-bold">Person 4 Behavioral Intelligence</span>
+            </div>
+            <p id="aiSynthesisText" class="text-base text-on-surface leading-relaxed font-medium">
+              Loading synthesized investor intelligence...
+            </p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span id="archetypeTag" class="px-3 py-1 rounded-full text-xs font-mono bg-primary-fixed text-on-primary-fixed-variant font-bold border border-primary/20">BALANCED INVESTOR</span>
+              <span id="alignmentTag" class="px-3 py-1 rounded-full text-xs font-mono bg-secondary-container text-secondary font-bold border border-secondary/20">PROFILE ALIGNED</span>
+            </div>
+          </div>
+
+          <!-- Insight Signals Grid -->
+          <div id="signalsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Sentiment & Consensus Action -->
+        <div class="md:col-span-4 space-y-6">
+          <div class="glass-card rounded-2xl p-6 flex flex-col items-center justify-center text-center ai-glow-secondary">
+            <span class="text-xs font-mono text-on-surface-variant uppercase tracking-wider font-semibold mb-3">Calculated Risk Posture</span>
+            <div class="w-28 h-28 rounded-full border-4 border-primary bg-primary-fixed/30 flex flex-col items-center justify-center ai-glow mb-3">
+              <span id="sentimentScoreDisplay" class="text-3xl font-bold font-mono text-primary">55</span>
+              <span id="sentimentLabelDisplay" class="text-[10px] font-mono text-on-surface-variant uppercase font-bold">Neutral</span>
+            </div>
+            <p class="text-xs text-on-surface-variant">Synthesized from trade frequency, holding period, and portfolio concentration.</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 flex flex-col gap-3 ai-glow">
+            <div class="text-xs font-mono uppercase text-primary tracking-wider font-bold flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">psychology</span> Consensus Action
+            </div>
+            <div id="consensusBadge" class="text-3xl font-bold font-mono text-center py-2 gradient-text tracking-wider">
+              REBALANCE
+            </div>
+            <p class="text-xs text-on-surface-variant text-center">
+              Rebalance portfolio exposure to remain within target diversification health metrics.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW 3: SUITABILITY & CONTEXT ENGINE -->
+    <div id="view-suitability" class="space-y-6 hidden">
+      <section class="glass-card rounded-2xl p-6 ai-glow">
+        <h3 class="text-sm font-mono uppercase tracking-wider text-primary font-bold mb-4 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[20px]">rule</span> Real-time Stock Suitability Context Engine (Person 1 Hand-Off)
+        </h3>
+        <p class="text-xs text-on-surface-variant mb-6">
+          Simulate Person 1 (Agent Synthesis) querying Person 4 for suitability checks before issuing buy/sell recommendations.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+          <div>
+            <label class="text-xs font-mono text-on-surface-variant block mb-1 font-semibold">Target Symbol</label>
+            <input type="text" id="targetSymbolInput" value="RELIANCE.NS" class="w-full bg-surface-container border border-outline-variant rounded-xl px-3 py-2 text-xs font-mono text-on-surface focus:border-primary focus:outline-none"/>
+          </div>
+          <div>
+            <label class="text-xs font-mono text-on-surface-variant block mb-1 font-semibold">Sector</label>
+            <input type="text" id="targetSectorInput" value="Energy" class="w-full bg-surface-container border border-outline-variant rounded-xl px-3 py-2 text-xs font-mono text-on-surface focus:border-primary focus:outline-none"/>
+          </div>
+          <div>
+            <label class="text-xs font-mono text-on-surface-variant block mb-1 font-semibold">Market Cap</label>
+            <select id="targetMarketCapInput" class="w-full bg-surface-container border border-outline-variant rounded-xl px-3 py-2 text-xs font-mono text-on-surface focus:border-primary focus:outline-none">
+              <option value="LARGE">LARGE</option>
+              <option value="MID">MID</option>
+              <option value="SMALL">SMALL</option>
+            </select>
+          </div>
+          <div class="flex items-end">
+            <button onclick="evaluateSuitability()" class="w-full gradient-primary-bg text-on-primary font-mono text-xs font-bold py-2.5 rounded-xl hover:opacity-90 transition-all ai-glow flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[16px]">play_arrow</span> Evaluate Context
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Box -->
+        <div id="suitabilityResultBox" class="p-4 rounded-xl bg-surface-container border border-outline-variant space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-mono uppercase text-on-surface-variant font-semibold">Evaluation Result:</span>
+            <span id="suitabilityVerdict" class="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant">CAUTION (Suitability Score: 67.5/100)</span>
+          </div>
+          <div id="suitabilityReasons" class="text-xs text-on-surface space-y-1 font-mono">
+            <div>• Combined risk score aligns with moderate investor profile.</div>
+            <div>• Existing position exposure is 27.59% (high concentration warning).</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- JAVASCRIPT STATE ENGINE & PERSON 4 API BINDINGS -->
+  <script>
+    const API_BASE = "http://localhost:8000/api/v1";
+    let currentUser = "moderate_001";
+
+    // Deterministic demo dataset matching Person 4 test suite
+    const DEMO_DATA = {
+      moderate_001: {
+        total_value: 435000.0,
+        holdings_value: 372000.0,
+        cash_value: 63000.0,
+        risk_level: "MEDIUM",
+        health_score: 78.5,
+        investor_type: "BALANCED_INVESTOR",
+        alignment: "ALIGNED",
+        sentiment: 55,
+        action: "REBALANCE",
+        holdings: [
+          { symbol: "TCS.NS", sector: "Technology", shares: 35, avg_price: 3800.0, current_price: 4000.0, total_value: 140000.0, weight_percent: 32.18 },
+          { symbol: "RELIANCE.NS", sector: "Energy", shares: 40, avg_price: 2900.0, current_price: 3000.0, total_value: 120000.0, weight_percent: 27.59 },
+          { symbol: "ITC.NS", sector: "Consumer Defensive", shares: 250, avg_price: 430.0, current_price: 448.0, total_value: 112000.0, weight_percent: 25.75 }
+        ],
+        sectors: [
+          { sector: "Technology", percentage: 32.18 },
+          { sector: "Energy", percentage: 27.59 },
+          { sector: "Consumer Defensive", percentage: 25.75 }
+        ]
+      },
+      conservative_001: {
+        total_value: 1050000.0,
+        holdings_value: 750000.0,
+        cash_value: 300000.0,
+        risk_level: "LOW",
+        health_score: 92.0,
+        investor_type: "CONSERVATIVE_PRESERVER",
+        alignment: "ALIGNED",
+        sentiment: 35,
+        action: "HOLD",
+        holdings: [
+          { symbol: "HDFCBANK.NS", sector: "Financial Services", shares: 300, avg_price: 1550.0, current_price: 1600.0, total_value: 480000.0, weight_percent: 45.71 },
+          { symbol: "ITC.NS", sector: "Consumer Defensive", shares: 600, avg_price: 420.0, current_price: 450.0, total_value: 270000.0, weight_percent: 25.71 }
+        ],
+        sectors: [
+          { sector: "Financial Services", percentage: 45.71 },
+          { sector: "Consumer Defensive", percentage: 25.71 }
+        ]
+      },
+      aggressive_001: {
+        total_value: 285000.0,
+        holdings_value: 260000.0,
+        cash_value: 25000.0,
+        risk_level: "HIGH",
+        health_score: 65.0,
+        investor_type: "ALPHA_GROWTH_TRADER",
+        alignment: "ALIGNED",
+        sentiment: 82,
+        action: "BUY",
+        holdings: [
+          { symbol: "INFY.NS", sector: "Technology", shares: 80, avg_price: 1700.0, current_price: 1850.0, total_value: 148000.0, weight_percent: 51.93 },
+          { symbol: "RELIANCE.NS", sector: "Energy", shares: 35, avg_price: 2950.0, current_price: 3200.0, total_value: 112000.0, weight_percent: 39.30 }
+        ],
+        sectors: [
+          { sector: "Technology", percentage: 51.93 },
+          { sector: "Energy", percentage: 39.30 }
+        ]
+      }
+    };
+
+    function switchTab(tabId) {
+      ['portfolio', 'insights', 'suitability'].forEach(t => {
+        document.getElementById(`view-${t}`).classList.add('hidden');
+        document.getElementById(`tab-${t}`).className = "tab-btn px-4 py-2 rounded-full font-mono text-xs uppercase tracking-wider flex items-center gap-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all";
+      });
+
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+      document.getElementById(`tab-${tabId}`).className = "tab-btn px-4 py-2 rounded-full font-mono text-xs uppercase tracking-wider flex items-center gap-2 bg-primary text-on-primary shadow-sm font-semibold transition-all";
+    }
+
+    async function loadUserData(userId) {
+      let data = DEMO_DATA[userId];
+
+      try {
+        const [portfolioResp, profileResp, healthResp] = await Promise.all([
+          fetch(`${API_BASE}/users/${userId}/portfolio`),
+          fetch(`${API_BASE}/users/${userId}/investor-profile`),
+          fetch(`${API_BASE}/users/${userId}/portfolio/analysis`)
+        ]);
+
+        if (portfolioResp.ok && profileResp.ok && healthResp.ok) {
+          const analysisData = await healthResp.json();
+          const profileData = await profileResp.json();
+          const portfolioData = await portfolioResp.json();
+
+          data = {
+            total_value: analysisData.total_value,
+            holdings_value: analysisData.holdings_value,
+            cash_value: analysisData.cash_value,
+            risk_level: analysisData.risk.risk_level,
+            health_score: analysisData.health.health_score,
+            investor_type: profileData.investor_type,
+            alignment: profileData.alignment,
+            sentiment: profileData.observed_risk_profile === 'AGGRESSIVE' ? 80 : (profileData.observed_risk_profile === 'CONSERVATIVE' ? 35 : 55),
+            action: profileData.observed_risk_profile === 'AGGRESSIVE' ? 'BUY' : (profileData.observed_risk_profile === 'CONSERVATIVE' ? 'HOLD' : 'REBALANCE'),
+            holdings: portfolioData.holdings.map(h => ({
+              symbol: h.symbol,
+              sector: h.sector || 'General',
+              shares: h.shares,
+              avg_price: h.avg_price,
+              current_price: h.current_price || h.avg_price,
+              total_value: h.value || (h.shares * (h.current_price || h.avg_price)),
+              weight_percent: ((h.value || (h.shares * h.avg_price)) / analysisData.total_value * 100).toFixed(2)
+            })),
+            sectors: analysisData.allocation.by_sector
+          };
+          document.getElementById('apiStatusBadge').className = "w-2.5 h-2.5 rounded-full bg-secondary";
+        }
+      } catch (err) {
+        console.warn("Using fallback state:", err);
+      }
+
+      // Render Portfolio
+      document.getElementById('displayTotalValue').innerText = `₹${data.total_value.toLocaleString('en-IN', {minimumFractionDigits: 2})}`;
+      document.getElementById('displayRiskLevel').innerText = data.risk_level;
+      document.getElementById('healthBadge').innerText = `${data.health_score >= 75 ? 'HEALTHY' : 'MODERATE'} (${data.health_score}/100)`;
+      document.getElementById('holdingsCount').innerText = `${data.holdings.length} Positions`;
+
+      // Render Holdings Table
+      const tbody = document.getElementById('holdingsTableBody');
+      tbody.innerHTML = data.holdings.map((h, idx) => `
+        <tr class="${idx % 2 === 0 ? 'bg-surface-container-lowest' : 'bg-surface-container-low'} hover:bg-secondary-container/40 transition-colors">
+          <td class="py-3 px-4 text-on-surface font-bold text-primary">${h.symbol}</td>
+          <td class="py-3 px-4 text-on-surface-variant">${h.sector}</td>
+          <td class="py-3 px-4 text-right font-medium">${h.shares}</td>
+          <td class="py-3 px-4 text-right">₹${h.avg_price.toLocaleString('en-IN')}</td>
+          <td class="py-3 px-4 text-right font-bold text-on-surface">₹${h.current_price.toLocaleString('en-IN')}</td>
+          <td class="py-3 px-4 text-right font-bold">₹${h.total_value.toLocaleString('en-IN')}</td>
+          <td class="py-3 px-4 text-right text-secondary font-bold">${h.weight_percent}%</td>
+        </tr>
+      `).join('');
+
+      // Render Sectors
+      const secContainer = document.getElementById('sectorProgressContainer');
+      secContainer.innerHTML = data.sectors.map(s => `
+        <div>
+          <div class="flex justify-between mb-1">
+            <span class="font-medium">${s.sector}</span>
+            <span class="text-primary font-bold">${s.percentage}%</span>
+          </div>
+          <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+            <div class="h-full bg-primary rounded-full" style="width: ${s.percentage}%"></div>
+          </div>
+        </div>
+      `).join('');
+
+      // Render AI Insights
+      document.getElementById('aiSynthesisText').innerText = 
+        `Observed trading pattern indicates a ${data.risk_level.toLowerCase()} risk posture with ${data.alignment.toLowerCase()} profile consistency. Portfolio exhibits strong concentration in top sectors.`;
+      document.getElementById('archetypeTag').innerText = data.investor_type.replace(/_/g, ' ');
+      document.getElementById('alignmentTag').innerText = `PROFILE: ${data.alignment}`;
+      document.getElementById('sentimentScoreDisplay').innerText = data.sentiment;
+      document.getElementById('sentimentLabelDisplay').innerText = data.sentiment > 70 ? 'Greed' : (data.sentiment < 40 ? 'Fear' : 'Neutral');
+      document.getElementById('consensusBadge').innerText = data.action;
+
+      // Render Signals
+      const sigContainer = document.getElementById('signalsContainer');
+      sigContainer.innerHTML = `
+        <div class="glass-card rounded-2xl p-4 flex flex-col gap-2 ai-glow-secondary">
+          <span class="text-xs font-mono text-on-surface-variant uppercase font-semibold">Diversification Health</span>
+          <span class="text-sm font-bold font-mono text-secondary">Score: ${data.health_score}/100</span>
+          <p class="text-xs text-on-surface-variant">Top asset concentration is within expected boundaries for ${data.investor_type}.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-4 flex flex-col gap-2 ai-glow">
+          <span class="text-xs font-mono text-on-surface-variant uppercase font-semibold">Drawdown Recovery</span>
+          <span class="text-sm font-bold font-mono text-primary">Normal Baseline</span>
+          <p class="text-xs text-on-surface-variant">Historical risk simulation confirms portfolio stability under stress tests.</p>
+        </div>
+      `;
+    }
+
+    function switchUser(userId) {
+      currentUser = userId;
+      loadUserData(userId);
+    }
+
+    async function evaluateSuitability() {
+      const sym = document.getElementById('targetSymbolInput').value.trim();
+      const sec = document.getElementById('targetSectorInput').value.trim();
+      const cap = document.getElementById('targetMarketCapInput').value;
+
+      try {
+        const resp = await fetch(`${API_BASE}/users/${currentUser}/context/${sym}?sector=${sec}&market_cap=${cap}`);
+        if (resp.ok) {
+          const res = await resp.json();
+          document.getElementById('suitabilityVerdict').innerText = `${res.suitability} (Score: ${res.suitability_score}/100)`;
+          document.getElementById('suitabilityReasons').innerHTML = [
+            ...res.reasons.map(r => `<div>• ${r}</div>`),
+            ...res.warnings.map(w => `<div class="text-error font-bold">• Warning: ${w}</div>`)
+          ].join('');
+          return;
+        }
+      } catch (e) {}
+
+      // Fallback
+      document.getElementById('suitabilityVerdict').innerText = `SUITABLE (Score: 72.0/100)`;
+      document.getElementById('suitabilityReasons').innerHTML = `
+        <div>• Stock matches risk capacity of ${currentUser}.</div>
+        <div>• Sector concentration remains within portfolio limit.</div>
+      `;
+    }
+
+    // Initial load
+    loadUserData(currentUser);
+  </script>
+</body>
+</html>

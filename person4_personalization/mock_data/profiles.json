@@ -1,0 +1,62 @@
+{
+  "moderate_001": {
+    "user_id": "moderate_001",
+    "name": "Moderate User",
+    "risk_tolerance": "MODERATE",
+    "risk_capacity": "MEDIUM",
+    "investment_horizon": "MEDIUM_TERM",
+    "investor_style": "BALANCED",
+    "capital": 500000.0,
+    "preferences": {
+      "preferred_sectors": ["Energy", "Finance"],
+      "excluded_sectors": ["Technology"],
+      "esg_only": false
+    },
+    "constraints": {
+      "max_single_position_pct": 20.0,
+      "max_sector_exposure_pct": 35.0,
+      "excluded_sectors": ["Technology"],
+      "restricted_symbols": []
+    }
+  },
+  "conservative_001": {
+    "user_id": "conservative_001",
+    "name": "Conservative User",
+    "risk_tolerance": "CONSERVATIVE",
+    "risk_capacity": "LOW",
+    "investment_horizon": "SHORT_TERM",
+    "investor_style": "DEFENSIVE",
+    "capital": 1000000.0,
+    "preferences": {
+      "preferred_sectors": ["FMCG", "Utilities"],
+      "excluded_sectors": ["Crypto", "Penny"],
+      "esg_only": false
+    },
+    "constraints": {
+      "max_single_position_pct": 10.0,
+      "max_sector_exposure_pct": 25.0,
+      "excluded_sectors": ["Crypto"],
+      "restricted_symbols": []
+    }
+  },
+  "aggressive_001": {
+    "user_id": "aggressive_001",
+    "name": "Aggressive User",
+    "risk_tolerance": "AGGRESSIVE",
+    "risk_capacity": "HIGH",
+    "investment_horizon": "LONG_TERM",
+    "investor_style": "GROWTH",
+    "capital": 250000.0,
+    "preferences": {
+      "preferred_sectors": ["Technology", "Energy", "Healthcare"],
+      "excluded_sectors": [],
+      "esg_only": false
+    },
+    "constraints": {
+      "max_single_position_pct": 30.0,
+      "max_sector_exposure_pct": 50.0,
+      "excluded_sectors": [],
+      "restricted_symbols": []
+    }
+  }
+}
