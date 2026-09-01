@@ -1,0 +1,40 @@
+{
+  "symbol": "TCS",
+  "market_data": {
+    "price": 3421,
+    "rsi": 63,
+    "ema20": 3315,
+    "ema50": 3242,
+    "macd": 1.2,
+    "volume_change": 18,
+    "momentum": 0.74,
+    "volatility": 0.28
+  },
+  "news_data": {
+    "sentiment_score": 0.71,
+    "positive_news": 8,
+    "negative_news": 2,
+    "headlines": [
+      "TCS reports strong quarterly growth",
+      "Analysts upgrade TCS outlook after earnings beat",
+      "Record profit announced in latest quarter",
+      "Strong demand for AI and cloud services"
+    ]
+  },
+  "fundamental_data": {
+    "revenue_growth": 11.2,
+    "profit_growth": 8.5,
+    "pe_ratio": 28,
+    "rag_summary": "Strong quarterly revenue growth, healthy profit increase and positive management guidance for AI and cloud business.",
+    "sources": [
+      "TCS Q1 FY26 Quarterly Results",
+      "SEBI Filing",
+      "Annual Report"
+    ]
+  },
+  "user_profile": {
+    "risk_tolerance": "moderate",
+    "portfolio_exposure": 25,
+    "investment_horizon": "long_term"
+  }
+}
