@@ -1,0 +1,56 @@
+[
+  {
+    "symbol": "RELIANCE.NS",
+    "headline": "Reliance Industries Q3 EBITDA grows 11.2% led by Retail and Jio",
+    "source": "Financial Express (Demo)",
+    "url": "https://example.com/news/reliance-q3-fy25",
+    "published_time": "2025-01-20T10:30:00Z",
+    "summary": "Reliance Industries reported a strong quarterly performance with consolidated EBITDA touching INR 44,678 crore. Jio subscriber additions remained strong.",
+    "raw_text": "Reliance Industries Limited reported consolidated EBITDA of INR 44,678 crore for the third quarter ended December 31, 2024."
+  },
+  {
+    "symbol": "RELIANCE.NS",
+    "headline": "Jio crosses 480 million subscribers as 5G adoption accelerates",
+    "source": "Economic Times (Demo)",
+    "url": "https://example.com/news/jio-subscribers-5g",
+    "published_time": "2025-01-21T08:15:00Z",
+    "summary": "Reliance Jio added 11.8 million net subscribers in Q3 FY25 with ARPU rising to INR 182.4.",
+    "raw_text": "Jio Platforms Limited reported robust subscriber additions and high data consumption growth across enterprise and consumer 5G."
+  },
+  {
+    "symbol": "TCS.NS",
+    "headline": "TCS reports 25.0% EBIT margin and $8.1B TCV in Q3",
+    "source": "Mint (Demo)",
+    "url": "https://example.com/news/tcs-q3-margins",
+    "published_time": "2025-01-12T16:45:00Z",
+    "summary": "Tata Consultancy Services posted resilient operating margins and strong order wins driven by AI WisdomNext and cloud deals.",
+    "raw_text": "TCS delivered 25.0% operating margin and declared interim and special dividends totaling INR 28 per share."
+  },
+  {
+    "symbol": "INFY.NS",
+    "headline": "Infosys wins $3.2B large deals in Q3, raises revenue guidance",
+    "source": "Business Standard (Demo)",
+    "url": "https://example.com/news/infosys-q3-results",
+    "published_time": "2025-01-15T12:00:00Z",
+    "summary": "Infosys demonstrated solid deal momentum with 71% net new deals and strong adoption of Infosys Topaz AI platform.",
+    "raw_text": "Infosys reported Q3 FY25 constant currency revenue growth of 5.1% YoY with Free Cash Flow conversion at 106% of net profit."
+  },
+  {
+    "symbol": "HDFCBANK.NS",
+    "headline": "HDFC Bank Q3 Net Profit jumps 33.5% post-merger, GNPA improves to 1.26%",
+    "source": "Moneycontrol (Demo)",
+    "url": "https://example.com/news/hdfc-bank-q3",
+    "published_time": "2025-01-18T14:20:00Z",
+    "summary": "HDFC Bank reported net profit of INR 16,372 crore with improved asset quality and deposit growth of 27.7% YoY.",
+    "raw_text": "HDFC Bank maintained strong balance sheet resilience with Capital Adequacy Ratio at 18.4%."
+  },
+  {
+    "symbol": "ITC.NS",
+    "headline": "ITC Q3 Net Profit rises 10.7% to INR 5,400 Cr; declares INR 6.25 dividend",
+    "source": "CNBC-TV18 (Demo)",
+    "url": "https://example.com/news/itc-q3-profit",
+    "published_time": "2025-01-24T11:00:00Z",
+    "summary": "ITC delivered steady FMCG margin expansion and record RevPAR in Hotels while approving interim dividend of INR 6.25 per share.",
+    "raw_text": "ITC Limited registered gross revenue of INR 18,608 crore supported by FMCG, Agri and Hotels segment growth."
+  }
+]

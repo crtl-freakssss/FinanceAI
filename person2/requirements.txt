@@ -1,0 +1,9 @@
+pandas
+numpy
+yfinance
+chromadb
+sentence-transformers
+pytest
+python-dotenv
+pymupdf
+requests

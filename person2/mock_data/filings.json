@@ -1,0 +1,42 @@
+{
+  "RELIANCE.NS": [
+    {
+      "title": "Q3 FY25 Financial Results",
+      "date": "2025-01-20",
+      "path": "documents/reliance/q3_fy25_financial_results.txt"
+    },
+    {
+      "title": "Annual Report Highlights",
+      "date": "2024-06-30",
+      "path": "documents/reliance/annual_report_summary.txt"
+    }
+  ],
+  "TCS.NS": [
+    {
+      "title": "Q3 FY25 Earnings Release",
+      "date": "2025-01-12",
+      "path": "documents/tcs/q3_fy25_earnings_release.txt"
+    }
+  ],
+  "INFY.NS": [
+    {
+      "title": "Q3 FY25 Financial Statement",
+      "date": "2025-01-15",
+      "path": "documents/infosys/q3_fy25_financial_statement.txt"
+    }
+  ],
+  "HDFCBANK.NS": [
+    {
+      "title": "Q3 FY25 Performance Review",
+      "date": "2025-01-18",
+      "path": "documents/hdfcbank/q3_fy25_performance_review.txt"
+    }
+  ],
+  "ITC.NS": [
+    {
+      "title": "Q3 FY25 Financial Report",
+      "date": "2025-01-24",
+      "path": "documents/itc/q3_fy25_financial_report.txt"
+    }
+  ]
+}

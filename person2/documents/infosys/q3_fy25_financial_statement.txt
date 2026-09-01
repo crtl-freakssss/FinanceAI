@@ -1,0 +1,13 @@
+INFOSYS LIMITED
+FINANCIAL RESULTS FOR THE THIRD QUARTER ENDED DECEMBER 31, 2024
+[DEMO / SIMULATED FINANCIAL DOCUMENT FOR HACKATHON]
+
+Page 1: Performance Summary & Guidance
+Infosys reported Q3 FY25 revenue of INR 38,821 crore ($4.66 billion), delivering year-on-year revenue growth of 5.1% in constant currency. Operating margin stood at 20.5%, in line with the revised full-year guidance range of 20.0% - 21.0%.
+Net Profit for the quarter was INR 6,586 crore, up 7.8% YoY. Free cash flow generation was exceptional at $840 million (INR 7,010 crore), representing 106% of net profit.
+
+Page 2: Large Deal Wins & TopScale AI
+Large deal TCV for Q3 FY25 was $3.2 billion with 71% net new deals. Infosys Topaz (Generative AI suite) saw accelerated adoption across banking and telecommunications clients with over 220 active generative AI projects.
+
+Page 3: Vertical Growth & Attrition
+Financial Services contributed 27.8% of total revenues, Retail 14.5%, Communication 12.2%, and Manufacturing 14.8%. Voluntary attrition for IT services declined to 12.9% on a trailing twelve months basis.
