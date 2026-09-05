@@ -59,7 +59,14 @@ async def health():
 @app.post("/analyze-stock")
 async def analyze_stock(request: AnalysisRequest):
     """
-    Main endpoint used by the frontend.
+    Main endpoint used by the frontend / orchestrator.
     """
     result = await graph.run(request.model_dump())
     return result
+
+
+if __name__ == "__main__":
+    import uvicorn
+    import os
+    port = int(os.getenv("PERSON1_PORT", "8001"))
+    uvicorn.run("app:app", host="0.0.0.0", port=port, reload=True)

@@ -4,10 +4,10 @@
 This document establishes the architecture, boundaries, and integration mechanics for connecting the **StIC MCP / SI Terminal Intelligence Platform** (Stitch Design Project ID: `15879964569093521067`) with the completed **Person 4 Personalization & Portfolio Intelligence Service**.
 
 ### Core Tenets
-1. **Zero Rebuilding**: Neither Person 4 nor the StIC design system will be rewritten or duplicated.
+1. **Zero Rebuilding**: Neither Person 4 nor the StIC design system is rewritten or duplicated.
 2. **Person 4 Remains Single Source of Truth**: User profiles, portfolios, risk engines, behavioral models, suitability context, security, logging, and database persistence reside exclusively in Person 4.
 3. **Public HTTP API Integration Boundary**: StIC interacts with Person 4 strictly via the versioned REST API (`/api/v1/...`) or typed HTTP client adapters, ensuring loose coupling and clean boundary separation.
-4. **Design System & MCP Harmonization**: The StIC design system (High-Precision Terminal theme, Dark mode `#051424`, Desaturated Teal `#2DD4BF`, Inter/JetBrains Mono typography) is dynamically powered by Person 4 live endpoints.
+4. **Design System & MCP Harmonization**: The StIC design system (Institutional Blue & DM Sans theme, `#f8f9ff` background, `#006398` primary, `#0ba5f8` sky accent, DM Sans / JetBrains Mono typography, rounded-2xl cards) is dynamically powered by Person 4 live endpoints.
 
 ---
 
@@ -23,7 +23,7 @@ This document establishes the architecture, boundaries, and integration mechanic
   - Phase 5: Database & Persistence (SQLAlchemy models: Users, Profiles, Portfolios, Analysis Sessions, Audit Logs)
   - Phase 6: Production API (Versioned `/api/v1/`, OpenAPI 3.0, custom error schemas)
   - Phase 7: Logging & Telemetry (Structured JSON logger, X-Request-ID tracing, in-memory latency metrics)
-  - Phase 8: Security & Validation (Finite number validation, regex sanitization, rate limiting, security headers)
+  - Phase 8: Security & Validation (Finite number validation, regex sanitization, rate limiting, granular documentation CSP)
   - Phase 9: Integration Contract (`examples/person4_client.py`, `docs/integration_contract.md`)
   - Phase 10: Hackathon Demo Suite (`mock_data/`, `tests/test_demo_flow.py`, `scripts/smoke_test.py`)
 - **Dependencies**: `fastapi`, `uvicorn`, `pydantic`, `sqlalchemy`, `pytest`, `httpx`
@@ -32,20 +32,21 @@ This document establishes the architecture, boundaries, and integration mechanic
 ### B. StIC MCP / SI Terminal Platform
 - **Stitch Project ID**: `15879964569093521067` ("SI Terminal Intelligence Platform")
 - **Design System Tokens**:
-  - Theme: High-Precision Intelligence (Glassmorphism + Dark Terminal)
-  - Background: `#051424` / Surface: `#122131` / Border: `#252A30` / Outline: `#3c4a46`
-  - Accent (AI): Desaturated Teal (`#2DD4BF` / `#57f1db`)
-  - Bullish / Bearish: Muted Emerald (`#10B981`) / Coral Red (`#F43F5E`)
-  - Typography: `Inter` (UI/Headlines) & `JetBrains Mono` (Financial data, tickers, metrics)
+  - Theme: Institutional Blue & Modern Technical
+  - Background: `#f8f9ff` / Surface: `#ebeef6` / Elevated Card: `#ffffff`
+  - Accent / Primary: `#006398` (Institutional Blue) / `#0ba5f8` (Sky Blue Container)
+  - Secondary: `#3c6282` (Slate Blue) / `#b3d8fd` (Secondary Container)
+  - Semantic: `#ba1a1a` (Error/Bearish), `#954645` (Tertiary/Caution)
+  - Typography: `DM Sans` (UI / Headlines / Labels) & `JetBrains Mono` (Financial data, tickers, metrics)
 - **Screens Identified**:
-  1. `SI Terminal - Dashboard` (`1306827099d548d3bf58c9e9f6906178`): Overview, top cards, quick metrics
-  2. `SI Terminal - Portfolio` (`1734dd1519464039808c52c8ddf7ac98`): Holdings table, asset/sector exposure, performance SVG chart
-  3. `SI Terminal - AI Insights` (`9c2f77e131c34fe7bbc64ad2465d19b3`): Live AI synthesis, technical/fundamental indicators, market sentiment meter, consensus action
-  4. `SI Terminal - Stock Analysis` (`6c0a397e522d4cadb2120f29206788e1`): Single asset deep-dive
-  5. `SI Terminal - Market Overview` (`5a10ca669fdc4ab9b8a27192c7f65c4d`): Macro indicators
-  6. `SI Terminal - Wallet` (`5b036d234150451e9fa3a0973bb87fd2`): Cash and funding status
-  7. `SI Terminal - Watchlist` (`10798dffa01e42a5a5d5036a08249328`): Monitored tickers
-  8. `SI Terminal - Settings` (`4e94d5dbe00140faa950ef261a6e40a8`): User configuration & risk preferences
+  1. `SI Terminal - Auth Hub` (`aa7421504f4846e6a220e3861e266b41`): Desktop / Split Bento registration and login
+  2. `SI Terminal - Portfolio` (`00c12f1ce5c449ac94563dad0023c47c`): Holdings table, asset/sector exposure, performance SVG chart
+  3. `SI Terminal - AI Insights` (`a385b412a5d444f991a20a1f893072de`): Live AI synthesis, behavioral profile alignment, sentiment meter gauge, consensus action
+  4. `SI Terminal - Stock Analysis` (`37918e699e264851a16e82642a264389`): Single asset suitability evaluation
+  5. `SI Terminal - Market Overview` (`8cbd97d0ba3b4098a915408dd5656868`): Macro indicators
+  6. `SI Terminal - Watchlist` (`be1352bc8c13419a800dd6e5f812dc49`): Monitored tickers
+  7. `SI Terminal - Wallet` (`fd3c632210704cbe827a30dcd94a7724`): Cash and funding status
+  8. `SI Terminal - Settings` (`a33752d8981143bbb61f44cc2e145e50`): User configuration & risk preferences
 
 ---
 
@@ -112,13 +113,13 @@ This document establishes the architecture, boundaries, and integration mechanic
 
 ## 5. StIC MCP Tools & Adapters Specification
 
-A standalone, non-intrusive module `stic/` will be structured as follows:
+A standalone, non-intrusive module `stic/` is structured as follows:
 
 ```
 person4_personalization/
   stic/
     __init__.py
-    config.py                  # StIC configuration (API URLs, Project ID)
+    config.py                  # StIC configuration (API URLs, Project ID, Design Tokens)
     client/
       __init__.py
       stic_person4_client.py   # Robust HTTP client to Person 4 API
@@ -137,18 +138,20 @@ person4_personalization/
       terminal_dashboard.html  # Live, interactive SI Terminal powered by Person 4
 ```
 
-### StIC MCP Tools Catalog:
+### Complete StIC MCP Tools Catalog:
 1. `stic_get_portfolio_intelligence`: Retrieves total portfolio value, holdings, allocation, health status, and concentration score.
 2. `stic_get_personalization_context`: Computes suitability score, warnings, and constraints for a given ticker and user.
 3. `stic_get_advanced_risk_report`: Retrieves quantitative volatility, max drawdown, and risk factors.
 4. `stic_get_investor_behavior_profile`: Returns user trading archetype, alignment score, and behavioral recommendations.
-5. `stic_get_terminal_dashboard_data`: Single aggregated payload powering all SI Terminal screens simultaneously.
+5. `stic_get_user_profile`: Returns user risk profile, horizon, and capacity.
+6. `stic_get_user_holdings`: Returns raw position weights and cash balance.
+7. `stic_get_terminal_dashboard_data`: Single aggregated payload powering all SI Terminal screens simultaneously.
 
 ---
 
 ## 6. Environment Configuration
 
-The environment file `.env.example` will include:
+The environment file `.env.example`:
 ```ini
 # Person 4 Core Service
 APP_ENV=development
@@ -169,6 +172,6 @@ STIC_PROJECT_ID=15879964569093521067
 ---
 
 ## 7. Verification & Testing Strategy
-1. **Regression Safety**: Execute full Person 4 test suite (`python -m pytest tests/ -v`) — all 122 tests must pass with 0 regressions.
-2. **Adapter & MCP Unit Tests**: Create `tests/test_stic_integration.py` verifying client connectivity, data formatting, and MCP tool execution.
-3. **End-to-End Live UI / Flow Test**: Validate that deterministic demo users (`moderate_001`, `conservative_001`, `aggressive_001`) correctly populate the SI Terminal UI and StIC MCP tools.
+1. **Regression Safety**: Execute full Person 4 test suite (`python -m pytest tests/ -v`) — all 135 tests passing with 0 regressions.
+2. **Adapter & MCP Unit Tests**: `tests/test_stic_integration.py` verifies client connectivity, data formatting, and all 7 MCP tool executions.
+3. **End-to-End Live UI / Flow Test**: Validated that deterministic demo users (`moderate_001`, `conservative_001`, `aggressive_001`) dynamically populate the SI Terminal UI and StIC MCP tools with 0 console errors.

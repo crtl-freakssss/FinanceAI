@@ -1,7 +1,11 @@
 import json
 import os
-import yfinance as yf
+try:
+    import yfinance as yf
+except ImportError:
+    yf = None
 from .news_parser import parse_news
+
 
 MOCK_DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "mock_data", "news.json")
 

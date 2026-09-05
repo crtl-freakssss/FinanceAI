@@ -1,10 +1,17 @@
+import os
+import sys
 import pytest
+
+_person1_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if _person1_dir not in sys.path:
+    sys.path.insert(0, _person1_dir)
 
 from agents.technical_agent import TechnicalAgent
 from agents.fundamental_agent import FundamentalAgent
 from agents.sentiment_agent import SentimentAgent
 from agents.risk_agent import RiskAgent
 from orchestration.graph import FinancialAIGraph
+
 
 
 sample_input = {
@@ -47,7 +54,7 @@ sample_input = {
 }
 
 
-@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_individual_agents():
     technical = await TechnicalAgent().execute(sample_input)
     fundamental = await FundamentalAgent().execute(sample_input)
@@ -65,8 +72,9 @@ async def test_individual_agents():
     assert risk.signal in ["BUY", "HOLD", "SELL", "AVOID"]
 
 
-@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_full_orchestrator():
+
     graph = FinancialAIGraph()
 
     result = await graph.run(sample_input)

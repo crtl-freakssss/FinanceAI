@@ -72,6 +72,14 @@ async def security_headers_and_rate_limit_middleware(request: Request, call_next
             "img-src 'self' data: https://fastapi.tiangolo.com https://cdn.jsdelivr.net; "
             "connect-src 'self'"
         )
+    elif path in ("/dashboard", "/terminal", "/ui") or path.startswith("/ui/"):
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline'; "
+            "style-src 'self' 'unsafe-inline'; "
+            "img-src 'self' data:; "
+            "connect-src 'self' http://127.0.0.1:8000 http://localhost:8000"
+        )
     else:
         response.headers["Content-Security-Policy"] = "default-src 'self'"
 

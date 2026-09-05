@@ -1,8 +1,13 @@
-import yfinance as yf
+try:
+    import yfinance as yf
+except ImportError:
+    yf = None
+
 import json
 import os
 import datetime
 from .cache import get_cache, set_cache
+
 
 MOCK_DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "mock_data", "market.json")
 

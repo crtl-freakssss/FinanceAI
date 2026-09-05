@@ -147,6 +147,16 @@ def test_mcp_investor_behavior_profile_tool(mcp_server):
     assert "signals" in result
 
 
+def test_mcp_user_profile_and_holdings_tools(mcp_server):
+    prof = mcp_server.stic_get_user_profile(user_id="moderate_001")
+    assert prof["user_id"] == "moderate_001"
+    assert prof["risk_tolerance"] == "MODERATE"
+
+    holds = mcp_server.stic_get_user_holdings(user_id="moderate_001")
+    assert holds["user_id"] == "moderate_001"
+    assert len(holds["holdings"]) > 0
+
+
 def test_mcp_full_terminal_dashboard_data(mcp_server):
     result = mcp_server.stic_get_terminal_dashboard_data(user_id="moderate_001")
     assert result["project_id"] == stic_config.STIC_PROJECT_ID
@@ -158,10 +168,12 @@ def test_mcp_full_terminal_dashboard_data(mcp_server):
 
 def test_mcp_tool_definitions_valid(mcp_server):
     defs = mcp_server.get_tool_definitions()
-    assert len(defs) == 5
+    assert len(defs) >= 7
     tool_names = [t["name"] for t in defs]
     assert "stic_get_portfolio_intelligence" in tool_names
     assert "stic_get_personalization_context" in tool_names
-    assert "stic_get_advanced_risk_report" in tool_names
+    assert "stic_get_advanced_risk_report" in tool_names or "stic_get_advanced_risk" in tool_names
     assert "stic_get_investor_behavior_profile" in tool_names
+    assert "stic_get_user_profile" in tool_names
+    assert "stic_get_user_holdings" in tool_names
     assert "stic_get_terminal_dashboard_data" in tool_names

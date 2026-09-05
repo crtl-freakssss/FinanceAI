@@ -1,7 +1,6 @@
 from fastapi.testclient import TestClient
 
 from app import app
-
 from portfolio.analytics import (
     calculate_allocation,
     calculate_concentration,
@@ -11,17 +10,12 @@ from portfolio.analytics import (
     calculate_portfolio_health,
     calculate_portfolio_risk,
 )
-
 from portfolio.service import get_portfolio
-from profile.service import get_profile
+from profile.service import get_user_profile
 
 
 client = TestClient(app)
 
-
-# ============================================================
-# ALLOCATION
-# ============================================================
 
 def test_allocation_percentages_are_valid():
     portfolio = get_portfolio("moderate_001")
@@ -37,10 +31,6 @@ def test_allocation_percentages_are_valid():
     for item in result.by_sector:
         assert 0 <= item.percentage <= 100
 
-
-# ============================================================
-# CONCENTRATION
-# ============================================================
 
 def test_concentration_score_is_bounded():
     portfolio = get_portfolio("moderate_001")
@@ -59,14 +49,12 @@ def test_concentration_score_is_bounded():
     }
 
 
-# ============================================================
-# DIVERSIFICATION
-# ============================================================
-
 def test_diversification_score_is_bounded():
     portfolio = get_portfolio("moderate_001")
 
-    concentration = calculate_concentration(portfolio)
+    concentration = calculate_concentration(
+        portfolio,
+    )
 
     score = calculate_diversification_score(
         portfolio,
@@ -76,16 +64,9 @@ def test_diversification_score_is_bounded():
     assert 0 <= score <= 100
 
 
-# ============================================================
-# EXPOSURE
-# ============================================================
-
 def test_exposure_calculation():
-    user = get_profile("moderate_001")
+    user = get_user_profile("moderate_001")
     portfolio = get_portfolio("moderate_001")
-
-    assert user is not None
-    assert portfolio is not None
 
     result = calculate_exposure(
         portfolio,
@@ -104,16 +85,9 @@ def test_exposure_calculation():
     assert 0 <= result.sector_exposure_percent <= 100
 
 
-# ============================================================
-# POSITION BREACH
-# ============================================================
-
 def test_position_breach_is_detected():
-    user = get_profile("conservative_001")
+    user = get_user_profile("conservative_001")
     portfolio = get_portfolio("conservative_001")
-
-    assert user is not None
-    assert portfolio is not None
 
     result = calculate_exposure(
         portfolio,
@@ -122,7 +96,7 @@ def test_position_breach_is_detected():
         "Energy",
     )
 
-    assert result.position_exposure_percent >= 0
+    assert result.position_exposure_percent > 0
 
     if (
         result.position_exposure_percent
@@ -131,16 +105,9 @@ def test_position_breach_is_detected():
         assert result.position_breach is True
 
 
-# ============================================================
-# SECTOR BREACH
-# ============================================================
-
 def test_sector_breach_is_detected():
-    user = get_profile("moderate_001")
+    user = get_user_profile("moderate_001")
     portfolio = get_portfolio("moderate_001")
-
-    assert user is not None
-    assert portfolio is not None
 
     result = calculate_exposure(
         portfolio,
@@ -149,7 +116,7 @@ def test_sector_breach_is_detected():
         "Technology",
     )
 
-    assert result.sector_exposure_percent >= 0
+    assert result.sector_exposure_percent > 0
 
     if (
         result.sector_exposure_percent
@@ -157,10 +124,6 @@ def test_sector_breach_is_detected():
     ):
         assert result.sector_breach is True
 
-
-# ============================================================
-# PORTFOLIO RISK
-# ============================================================
 
 def test_portfolio_risk():
     portfolio = get_portfolio("moderate_001")
@@ -185,10 +148,6 @@ def test_portfolio_risk():
         "HIGH",
     }
 
-
-# ============================================================
-# PORTFOLIO HEALTH
-# ============================================================
 
 def test_portfolio_health():
     portfolio = get_portfolio("moderate_001")
@@ -219,10 +178,6 @@ def test_portfolio_health():
     }
 
 
-# ============================================================
-# COMPLETE ANALYSIS
-# ============================================================
-
 def test_complete_portfolio_analysis():
     portfolio = get_portfolio("moderate_001")
 
@@ -234,26 +189,19 @@ def test_complete_portfolio_analysis():
 
     assert result.total_value > 0
 
-    assert round(
-        result.total_value,
-        2,
-    ) == round(
-        result.holdings_value + result.cash_value,
-        2,
+    assert (
+        result.total_value
+        == result.holdings_value + result.cash_value
     )
 
     assert 0 <= result.cash_percent <= 100
     assert 0 <= result.equity_percent <= 100
 
-    assert result.allocation is not None
-    assert result.concentration is not None
-    assert result.risk is not None
-    assert result.health is not None
+    assert result.allocation
+    assert result.concentration
+    assert result.risk
+    assert result.health
 
-
-# ============================================================
-# API — ANALYSIS
-# ============================================================
 
 def test_api_portfolio_analysis():
     response = client.get(
@@ -273,10 +221,6 @@ def test_api_portfolio_analysis():
     assert "health" in body
 
 
-# ============================================================
-# API — ALLOCATION
-# ============================================================
-
 def test_api_allocation():
     response = client.get(
         "/api/users/moderate_001/portfolio/allocation"
@@ -290,10 +234,6 @@ def test_api_allocation():
     assert "by_sector" in body
 
 
-# ============================================================
-# API — CONCENTRATION
-# ============================================================
-
 def test_api_concentration():
     response = client.get(
         "/api/users/moderate_001/portfolio/concentration"
@@ -306,10 +246,6 @@ def test_api_concentration():
     assert "concentration_score" in body
     assert "largest_position_percent" in body
 
-
-# ============================================================
-# API — RISK
-# ============================================================
 
 def test_api_risk():
     response = client.get(
@@ -325,10 +261,6 @@ def test_api_risk():
     assert "diversification_score" in body
 
 
-# ============================================================
-# API — HEALTH
-# ============================================================
-
 def test_api_health():
     response = client.get(
         "/api/users/moderate_001/portfolio/health"
@@ -342,10 +274,6 @@ def test_api_health():
     assert "status" in body
 
 
-# ============================================================
-# API — EXPOSURE
-# ============================================================
-
 def test_api_exposure():
     response = client.get(
         "/api/users/moderate_001/portfolio/exposure/"
@@ -358,18 +286,14 @@ def test_api_exposure():
 
     assert body["symbol"] == "RELIANCE.NS"
     assert body["sector"] == "Energy"
-
     assert "position_breach" in body
     assert "sector_breach" in body
 
 
-# ============================================================
-# API — UNKNOWN USER
-# ============================================================
-
 def test_unknown_portfolio_user_returns_404():
     response = client.get(
-        "/api/users/does_not_exist/portfolio/analysis"
+        "/api/users/does_not_exist/"
+        "portfolio/analysis"
     )
 
     assert response.status_code == 404
