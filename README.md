@@ -151,6 +151,5 @@ uvicorn person4_personalization.app:app --host 127.0.0.1 --port 8000 --reload
 ---
 
 ## 8. License & Security
-- All sensitive credentials, database binaries, virtual environments, and `.env` files are excluded via `.gitignore`.
 - Security headers, CORS configuration, and input validation are active across all endpoints.
 - Distributed under the MIT License.
