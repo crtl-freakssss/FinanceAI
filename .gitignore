@@ -15,4 +15,10 @@ personalization.db
 logs/
 *.log
 .env
+.env.local
 .DS_Store
+.chroma/
+.cache/
+dist/
+build/
+*.egg-info/
